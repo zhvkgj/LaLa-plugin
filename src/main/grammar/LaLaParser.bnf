@@ -1,0 +1,133 @@
+{
+  parserClass="ru.mse.itmo.lala.language.parser.LaLaParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="LaLa"
+  psiImplClassSuffix="Impl"
+  psiPackage="ru.mse.itmo.lala.language.psi"
+  psiImplPackage="ru.mse.itmo.lala.language.psi.impl"
+
+  elementTypeHolderClass="ru.mse.itmo.lala.language.psi.LaLaTypes"
+  elementTypeClass="ru.mse.itmo.lala.language.psi.LaLaElementType"
+  tokenTypeClass="ru.mse.itmo.lala.language.psi.LaLaTokenType"
+
+  tokens=[
+    class='class'
+
+    number='regexp:-?[0-9]+'
+    inh='inh'
+    syn='syn'
+    grd='grd'
+    loc='loc'
+    use='use'
+    nil='nil'
+    true='true'
+    false='false'
+
+    ident='regexp:[a-zA-Z_]+[a-zA-Z0-9_]*'
+
+    lb='('
+    rb=')'
+    lcurly='{'
+    rcurly='}'
+    lsquare='['
+    rsquare=']'
+
+    charliteral="regexp:'[^']'";
+    space='regexp:\s+'
+    comment='regexp:#[^\r\n]*'
+    string='regexp:"([^"]|\\\\")*"'
+  ]
+}
+
+languageSpecification ::= useStatement * classDeclaration *
+
+useStatement ::= use ident ';'
+
+classDeclaration ::=
+    productionClassDeclaration
+    | literalClassDeclaration
+
+productionClassDeclaration ::= (annotation)* class ident '{' (attributeDeclaration)* (productionDeclaration)* '}'
+
+literalClassDeclaration ::= (annotation)* class ident '(' string ')' ';'
+
+attributeDeclaration ::= attributeModifier ident (':' attributeTypeName)? ';'
+
+attributeModifier ::=
+    INH
+    | SYN
+    | GRD
+
+attributeTypeName ::= ident
+
+productionDeclaration ::=
+    treeProductionDeclaration
+    | generatorProductionDeclaration
+
+treeProductionDeclaration ::= (annotation)* ident '(' serialization ')' '{' (localAttributeDefinition)* (attributeEvaluationRule)* '}'
+
+generatorProductionDeclaration ::= (annotation)* ident attributeFunctionCall ':' attributeTypeName '{' (localAttributeDefinition)* (attributeEvaluationRule)* '}'
+
+localAttributeDefinition ::= loc ident '=' attributeExpression ';'
+
+attributeEvaluationRule ::= attributeAccess '=' attributeExpression ';'
+
+attributeExpression ::=
+    attributeFunctionCall
+    | attributeAtom
+    | childReference
+
+attributeAtom ::=
+    attributeAccess
+    | localAttributeAccess
+    | attributeLiteral
+    | generatorValue
+
+childReference ::= ident
+
+attributeLiteral ::=
+    number
+    | string
+    | charliteral
+    | booleanLiteral
+    | nil
+
+booleanLiteral ::= (false | true)
+
+generatorValue ::= '$'
+
+attributeFunctionCall ::= '(' attributeFunction (attributeExpression)* ')'
+
+attributeAccess ::= ident '.' ident
+
+localAttributeAccess ::= '.' ident
+
+attributeFunction ::=
+    ident ':' ident
+    | attributeFunctionName
+
+attributeFunctionName ::=
+     '+'
+    | '-'
+    | '*'
+    | '/'
+    | '=='
+    | '!='
+    | '<'
+    | '>'
+    | '<='
+    | '>='
+    | ident
+
+annotation ::= '@' ident ('(' ( annotationArgument (',' annotationArgument)* (',')?)? ')')?
+
+annotationArgument ::= expression
+
+serialization ::= string
+
+expression ::=
+    number
+    | string
+    | ident

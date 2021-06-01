@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>ru.mit.ifmo.lala-plugin</id>
+    <name>Plugin display name here</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="LaLa File" implementationClass="ru.mse.itmo.lala.language.LaLaFileType"
+                  fieldName="INSTANCE" language="LaLa" extensions="ls"/>
+        <lang.parserDefinition language="LaLa"
+                               implementationClass="ru.mse.itmo.lala.language.LaLaParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="LaLa"
+                                       implementationClass="ru.mse.itmo.lala.language.highlighting.LaLaSyntaxHighlighterFactory"/>
+        <lang.commenter language="LaLa" implementationClass="ru.mse.itmo.lala.editor.LaLaCommenter"/>
+        <!-- brace matcher -->
+        <lang.braceMatcher language="LaLa" implementationClass="ru.mse.itmo.lala.language.highlighting.NonTrivial"/>
+        <!-- completion -->
+<!--        <completion.contributor language="LaLa"-->
+<!--                                implementationClass="ru.mse.itmo.lala.language.completion.LaLaCompletionContributor"/>-->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
