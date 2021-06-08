@@ -297,10 +297,10 @@ public class LaLaParser implements PsiParser, LightPsiParser {
   //     | '/'
   //     | '=='
   //     | '!='
-  //     | '<'
-  //     | '>'
   //     | '<='
   //     | '>='
+  //     | '<'
+  //     | '>'
   //     | ident
   public static boolean attributeFunctionName(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "attributeFunctionName")) return false;
@@ -312,10 +312,10 @@ public class LaLaParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, "/");
     if (!result_) result_ = consumeToken(builder_, "==");
     if (!result_) result_ = consumeToken(builder_, "!=");
-    if (!result_) result_ = consumeToken(builder_, "<");
-    if (!result_) result_ = consumeToken(builder_, ">");
     if (!result_) result_ = consumeToken(builder_, "<=");
     if (!result_) result_ = consumeToken(builder_, ">=");
+    if (!result_) result_ = consumeToken(builder_, "<");
+    if (!result_) result_ = consumeToken(builder_, ">");
     if (!result_) result_ = consumeToken(builder_, IDENT);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;

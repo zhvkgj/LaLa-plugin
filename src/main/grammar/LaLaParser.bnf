@@ -115,10 +115,10 @@ attributeFunctionName ::=
     | '/'
     | '=='
     | '!='
-    | '<'
-    | '>'
     | '<='
     | '>='
+    | '<'
+    | '>'
     | ident
 
 annotation ::= '@' ident ('(' ( annotationArgument (',' annotationArgument)* (',')?)? ')')?
