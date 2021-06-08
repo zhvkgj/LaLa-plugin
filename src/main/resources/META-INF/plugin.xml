@@ -22,9 +22,9 @@
         <lang.commenter language="LaLa" implementationClass="ru.mse.itmo.lala.editor.LaLaCommenter"/>
         <!-- brace matcher -->
         <lang.braceMatcher language="LaLa" implementationClass="ru.mse.itmo.lala.language.highlighting.NonTrivial"/>
-        <!-- completion -->
-<!--        <completion.contributor language="LaLa"-->
-<!--                                implementationClass="ru.mse.itmo.lala.language.completion.LaLaCompletionContributor"/>-->
+         completion
+        <completion.contributor language="LaLa"
+                                implementationClass="ru.mse.itmo.lala.language.completion.LaLaCompletionContributor"/>
     </extensions>
 
     <actions>
